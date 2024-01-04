@@ -64,24 +64,82 @@
                     <p class="fs-4 text-center">Можно заказать закуски и напитки</p>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                    <p class="fs-4 text-center">Можно купить интерактивный путеводитель</p>
+                    <p class="fs-4 text-center blue-100">Можно купить интерактивный путеводитель</p>
                 </div>
             </div>
         </div>
         <div class="container-fluid px-5">
             <h2>Список пешеходных маршрутов</h2>
-            <form>
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12 mt-3">
-                        <input type="text" class="form-control" placeholder="Поиск по названию">
-                    </div>
-                    <div class="col-lg-6 col-sm-12 mt-3">
-                        <select type="text" class="form-select" placeholder="Поиск по названию">
-                            <option selected>Основной объект</option>
-                        </select>
-                    </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12 mt-3">
+                    <input type="text" class="form-control" placeholder="Поиск по названию">
                 </div>
-            </form>
+                <div class="col-lg-6 col-sm-12 mt-3">
+                    <select type="text" class="form-select" placeholder="Поиск по названию">
+                        <option selected>Основной объект</option>
+                    </select>
+                </div>
+            </div>
+            <table class="table table-bordered my-4 route-table"
+                data-url="http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Основные объекты</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Routes navigation">
+                <ul class="pagination justify-content-center my-4">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </main>
 
@@ -90,6 +148,8 @@
             <p>Мой GitHub - <a href="https://github.com/Vasyaslav">Vasyaslav</a></p>
         </div>
     </footer>
+
+    <script src="main.js" defer></script>
 </body>
 
 </html>
