@@ -72,67 +72,59 @@
             <h2>Список пешеходных маршрутов</h2>
             <div class="row">
                 <div class="col-lg-6 col-sm-12 mt-3">
-                    <input type="text" class="form-control" placeholder="Поиск по названию">
+                    <input type="text" class="form-control searchField" placeholder="Поиск по названию">
                 </div>
                 <div class="col-lg-6 col-sm-12 mt-3">
-                    <select type="text" class="form-select" placeholder="Поиск по названию">
+                    <select type="text" class="form-select selectField" placeholder="Поиск по названию">
                         <option selected>Основной объект</option>
+                        <option>Двор</option>
+                        <option>Дом</option>
+                        <option>Музей</option>
+                        <option>Павильон</option>
+                        <option>Памятник</option>
+                        <option>Парк</option>
+                        <option>Собор</option>
+                        <option>Храм</option>
+                        <option>Церковь</option>
                     </select>
                 </div>
             </div>
-            <table class="table table-bordered my-4 route-table"
-                data-url="http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes">
-                <thead>
-                    <tr>
-                        <th>Название</th>
-                        <th>Описание</th>
-                        <th>Основные объекты</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row routeRow pt-2 px-0 mx-1">
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+            </div>
+            <div class="row routeRow px-0 mx-1">
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+            </div>
+            <div class="row routeRow px-0 mx-1">
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+            </div>
+            <div class="row routeRow pb-2 px-0 mx-1">
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+                <div class="col-lg-3 col-sm-6 border"></div>
+            </div>
             <nav aria-label="Routes navigation">
-                <ul class="pagination justify-content-center my-4">
+                <ul class="pagination justify-content-center my-4 routeBtns">
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
