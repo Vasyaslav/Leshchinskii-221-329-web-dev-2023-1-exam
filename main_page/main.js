@@ -4,11 +4,32 @@ let apiKey = '98e88cae-0dd8-4880-a68c-25873de4a2ca';
 let baseURL = 'http://exam-2023-1-api.std-900.ist.mospolytech.ru';
 let globalRoutes;
 let displayableRoutes = [];
+let currentGuides;
 let defaultSearchWord = '';
 let defaultSelectedWord = 'Основной объект';
+let defaultLanguage = 'Язык экскурсии';
+let defaultExperinceFrom = '';
+let defaultExperinceBefore = '';
 let paginationBtn = document.createElement('li');
 paginationBtn.classList.add('page-item');
 paginationBtn.innerHTML = '<a class="page-link" href="#">1</a>';
+
+function createGuideRow() {
+    let row = document.createElement('div');
+    row.className = 'row guideRow px-0 mx-1';
+    let col = document.createElement('div');
+    col.className = 'col-lg-2 col-sm-4 border';
+    let big_col = document.createElement('div');
+    big_col.className = 'col-lg-4 col-sm-8 border';
+    row.append(col);
+    row.append(big_col);
+    for (let i = 0; i < 3; i++) {
+        let col = document.createElement('div');
+        col.className = 'col-lg-2 col-sm-4 border';
+        row.append(col);
+    }
+    return row;
+}
 
 function routesBtnCreator() {
     if (displayableRoutes.length == 0) return;
@@ -38,7 +59,6 @@ function routesPlacing(page = 0) {
     let routeRows = document.body.querySelectorAll('div.routeRow');
     let rowsNumber = displayableRoutes.length - page * 4;
     if (displayableRoutes.length - page * 4 > 4) rowsNumber = 4;
-    console.log(rowsNumber);
     for (let i = 0; i < 4; i++) {
         let cols = routeRows[i].children;
         cols[0].innerHTML = '';
@@ -58,22 +78,87 @@ function routesPlacing(page = 0) {
             displayableRoutes[i + page * 4]].mainObject;
         let btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'btn btn-success';
+        btn.className = 'btn btn-success routeChoose';
         btn.innerHTML = 'Выбрать';
         cols[0].append(name);
         cols[1].append(description);
         cols[2].append(mainObject);
-        if (cols[3].innerHTML == '')
-            cols[3].append(btn);
+        cols[3].append(btn);
+    }
+}
+
+function languageDrawer() {
+    let languageField = document.body.querySelector('select.languageField');
+    while (languageField.children.length > 1) languageField.lastChild.remove();
+    let curLanguages = [];
+    for (let guide of currentGuides) {
+        for (let language of guide.language.split(', '))
+            if (!curLanguages.includes(language.trim()))
+                curLanguages.push(language.trim());
+    }
+    for (let language of curLanguages) {
+        let optionNode = document.createElement('option');
+        optionNode.innerHTML = language;
+        languageField.append(optionNode);
+    }
+}
+
+function guidesPlacing() {
+    console.log(1);
+    let guideRows = document.body.querySelectorAll('div.guideRow');
+    let guideFilters = document.body.querySelector('div.guideFilters');
+    let language = document.body.querySelector(
+        'select.languageField').value;
+    if (language == defaultLanguage) language = '';
+    let from = +document.body.querySelector(
+        'input.experienceFromField').value;
+    if (from == defaultExperinceFrom) from = -1;
+    let before = +document.body.querySelector(
+        'input.experienceBeforeField').value;
+    if (before == defaultExperinceBefore) before = 100;
+    for (let i = 0; i < guideRows.length; i++) {
+        guideRows[i].remove();
+    }
+    for (let guide of currentGuides) {
+        if (guide.language.includes(language) &&
+            guide.workExperience > from &&
+            guide.workExperience < before) {
+            let row = createGuideRow();
+            let cols = row.children;
+            let name = document.createElement('p');
+            name.innerHTML = guide.name;
+            let languages = document.createElement('p');
+            languages.innerHTML = guide.language;
+            let experience = document.createElement('p');
+            if (Math.floor(
+                guide.workExperience / 10) == 1 ||
+                guide.workExperience % 10 > 4)
+                experience.innerHTML = String(guide.workExperience) + ' лет';
+            else if (guide.workExperience % 10 == 1)
+                experience.innerHTML = String(guide.workExperience) + ' год';
+            else experience.innerHTML = String(guide.workExperience) + ' года';
+            let cost = document.createElement('p');
+            cost.innerHTML = guide.pricePerHour;
+            let btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'btn btn-primary guideChoose';
+            btn.innerHTML = 'Оформить заявку';
+            cols[0].append(name);
+            cols[1].append(languages);
+            cols[2].append(experience);
+            cols[3].append(cost);
+            cols[4].append(btn);
+            guideFilters.after(row);
+        }
     }
 }
 
 function displayableRoutesChange() {
     displayableRoutes = [];
     let searchParam = document.body.querySelector(
-        'input.searchField').value.trim();
+        'input.searchRouteField').value.trim();
     let selectedParam = document.body.querySelector(
-        'select.selectField').value;
+        'select.selectRouteField').value;
     if (searchParam != defaultSearchWord &&
         selectedParam == defaultSelectedWord) {
         for (let i = 0; i < globalRoutes.length; i++)
@@ -117,6 +202,28 @@ function routesLoading() {
     xhr.send();
 }
 
+function guidesLoading(rowindex) {
+    let url = new URL(baseURL);
+    let activeRoutePage = document.body.querySelector(
+        'ul.routeBtns > li > a.active');
+    let routeName = globalRoutes[displayableRoutes[(
+        +activeRoutePage.innerHTML - 1) * 4 + rowindex]].name;
+    document.body.querySelector('i.routeName').innerHTML = routeName;
+    let routeId = String(globalRoutes[
+        displayableRoutes[(+activeRoutePage.innerHTML - 1) * 4 + rowindex]].id);
+    url.pathname = '/api/routes/' + routeId + '/guides';
+    url.searchParams.append('api_key', apiKey);
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        currentGuides = this.response;
+        languageDrawer();
+        guidesPlacing();
+    };
+    xhr.send();
+}
+
 function routeArrowBtns(btns, clickedBtn, curBtn) {
     let edgePage = Math.floor(displayableRoutes.length / 4);
     if (displayableRoutes.length % 4 != 0) edgePage += 1;
@@ -153,7 +260,6 @@ function routeArrowBtns(btns, clickedBtn, curBtn) {
 function routeNumberBtns(btns, clickedBtn) {
     let edgePage = Math.floor(displayableRoutes.length / 4);
     let targetNumber = +clickedBtn.innerHTML;
-    console.log(targetNumber);
     if (displayableRoutes.length % 4 != 0) edgePage += 1;
     routesPlacing(targetNumber - 1);
     if (targetNumber < 3) {
@@ -199,11 +305,30 @@ function routePagination(event) {
     }
 }
 
+function routeBtnClickHandler(event) {
+    if (event.target.classList.contains('routeChoose')) {
+        let routeChooseBtns = document.body.querySelectorAll(
+            'button.routeChoose');
+        for (let i = 0; i < routeChooseBtns.length; i++)
+            if (routeChooseBtns[i] == event.target)
+                guidesLoading(i);
+
+    }
+}
+
 window.onload = function () {
     document.body.querySelector('ul.routeBtns').onclick = routePagination;
     document.body.querySelector(
-        'input.searchField').oninput = displayableRoutesChange;
+        'input.searchRouteField').oninput = displayableRoutesChange;
     document.body.querySelector(
-        'select.selectField').onchange = displayableRoutesChange;
+        'select.selectRouteField').onchange = displayableRoutesChange;
+    document.body.querySelector(
+        'div.routesCont').onclick = routeBtnClickHandler;
+    document.body.querySelector(
+        'select.languageField').onchange = guidesPlacing;
+    document.body.querySelector(
+        'input.experienceFromField').oninput = guidesPlacing;
+    document.body.querySelector(
+        'input.experienceBeforeField').oninput = guidesPlacing;
     routesLoading();
 };

@@ -6,8 +6,6 @@
     font-size: 264px;
 }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 48px;
+.input {
+    width: 60px;
 }

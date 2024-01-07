@@ -68,14 +68,14 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid px-5">
+        <div class="container-fluid px-5 routesCont">
             <h2>Список пешеходных маршрутов</h2>
             <div class="row">
                 <div class="col-lg-6 col-sm-12 mt-3">
-                    <input type="text" class="form-control searchField" placeholder="Поиск по названию">
+                    <input type="text" class="form-control searchRouteField" placeholder="Поиск по названию">
                 </div>
                 <div class="col-lg-6 col-sm-12 mt-3">
-                    <select type="text" class="form-select selectField" placeholder="Поиск по названию">
+                    <select type="text" class="form-select selectRouteField">
                         <option selected>Основной объект</option>
                         <option>Двор</option>
                         <option>Дом</option>
@@ -133,10 +133,29 @@
                 </ul>
             </nav>
         </div>
+        <div class="container-fluid px-5 guidesCont pb-2">
+            <h2>Доступные гиды по маршруту <i class="routeName"></i></h2>
+            <div class="row py-2 px-0 mx-1 guideFilters">
+                <div class="col-lg-4 col-sm-12">
+                    <select type="text" class="form-select languageField">
+                        <option selected>Язык экскурсии</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <div class="d-flex align-items-end">
+                        <label class="form-label">Опыт работы</label>
+                        <input type="number" min="0" max="100" class="form-control experienceFromField input ms-1"
+                            placeholder="от">
+                        <input type="number" min="0" max="100" class="form-control experienceBeforeField input ms-1"
+                            placeholder="до">
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <div class="footer">
+        <div class="container-fluid px-5">
             <p>Мой GitHub - <a href="https://github.com/Vasyaslav">Vasyaslav</a></p>
         </div>
     </footer>
