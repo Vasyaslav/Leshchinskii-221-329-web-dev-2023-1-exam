@@ -1,11 +1,104 @@
+body {
+    background-color: bisque;
+}
+
+header {
+    background-color: rgb(255, 191, 80);
+}
+
 .company-icon {
     font-size: 66px;
+    color: gold;
+    background-color: rgb(218, 199, 32);
+    border-radius: 5px;
 }
 
 .company-image {
     font-size: 264px;
+    color: gold;
+    background-color: rgb(218, 199, 32);
+    border-radius: 15px;
+}
+
+.descriptionCont {
+    background-color: brown;
+    border-radius: 30px;
+}
+
+.consCont {
+    background-color: salmon;
+    border-radius: 30px
+}
+
+.routesCont {
+    background-color: wheat;
+    border-radius: 30px;
+}
+
+.routeCol1 {
+    border-color: rgb(132, 106, 0) !important;
+}
+
+.routeCol2 {
+    border-color: rgb(169, 210, 44) !important;
+}
+
+.routeCol3 {
+    border-color: gray !important;
+}
+
+.routeCol4 {
+    border-color: green !important;
+}
+
+.guideCol1 {
+    border-color: rgb(132, 106, 0) !important;
+}
+
+.guideCol2 {
+    border-color: rgb(169, 210, 44) !important;
+}
+
+.guideCol3 {
+    border-color: gold !important;
+}
+
+.guideCol4 {
+    border-color: green !important;
+}
+
+.guideCol5 {
+    border-color: gray !important;
+}
+
+.modal-header {
+    background-color: rgb(255, 191, 80)
+}
+
+.modal-body {
+    background-color: bisque;
+}
+
+.modal-footer {
+    background-color: wheat;
+}
+
+.page-link {
+    background-color: darkorange;
+    border-color: coral;
+    color: black;
+}
+
+.page-link.active {
+    background-color: rgb(196, 108, 0);
+    border-color: rgb(173, 86, 55);
+    color: black;
 }
 
 .input {
     width: 60px;
+}
+
+.hidden {
+    display: none;
 }
