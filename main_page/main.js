@@ -20,7 +20,6 @@ let finalCostModifiers = [guideServiceCost, 1, 1.0, 0, 1, 1.0, false];
 
 function finalCostCalculator() {
     // Вычисление стоимости экскурсии с учётом всех факторов(день, время и т.п.)
-    console.log('Модификаторы: ', finalCostModifiers);
     let costForPeople;
     if (finalCostModifiers[4] < 6) costForPeople = 0;
     else if (finalCostModifiers[4] < 11) costForPeople = 1000;
@@ -30,7 +29,6 @@ function finalCostCalculator() {
         finalCostModifiers[5] +
         finalCostModifiers[6] * 1000 * finalCostModifiers[4];
     let finalCostSpan = document.getElementById('finalRouteCost');
-    console.log('Итоговая цена = ', finalCost);
     finalCostSpan.innerHTML = finalCost;
     return finalCost;
 }
@@ -444,7 +442,6 @@ function guideBtnHandler(event) {
         finalCostModifiers[0] = +guideServiceCost.slice(
             0, guideServiceCost.length - 1);
         let routeName = document.body.querySelector('i.routeName').innerText;
-        console.log('Данные о гиде ', guideName, routeName, guideServiceCost);
         changeModal(guideName, routeName);
     }
 }
