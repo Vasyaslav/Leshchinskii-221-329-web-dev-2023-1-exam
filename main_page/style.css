@@ -22,17 +22,17 @@ header {
 
 .descriptionCont {
     background-color: brown;
-    border-radius: 30px;
+    /* border-radius: 30px; */
 }
 
 .consCont {
     background-color: salmon;
-    border-radius: 30px
+    /* border-radius: 30px */
 }
 
 .routesCont {
     background-color: wheat;
-    border-radius: 30px;
+    /* border-radius: 30px; */
 }
 
 .routeCol1 {

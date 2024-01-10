@@ -227,9 +227,17 @@ function routesLoading() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.responseType = 'json';
+    let errorFunc = function () {
+        document.getElementById('errorMessage').classList.remove('d-none');
+        alert(`При загрузке маршрутов произошла ошибка.`);
+    };
+    xhr.onerror = errorFunc;
     xhr.onload = function () {
-        globalRoutes = this.response;
-        displayableRoutesChange();
+        if (xhr.status != 200) errorFunc();
+        else {
+            globalRoutes = this.response;
+            displayableRoutesChange();
+        }
     };
     xhr.send();
 }
